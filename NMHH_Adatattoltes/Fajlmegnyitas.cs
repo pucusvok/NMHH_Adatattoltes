@@ -27,7 +27,7 @@ namespace NMHH_Adatattoltes
                     {
                         ConfigureDataTable = _ => new ExcelDataTableConfiguration
                         {
-                            UseHeaderRow = true
+                            UseHeaderRow = false
                         }
                     }).Tables[0];
 

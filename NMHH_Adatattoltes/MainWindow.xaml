@@ -5,18 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NMHH_Adatattoltes"
         mc:Ignorable="d"
-        Title="NMHH adatáttöltés" Height="225" Width="537" ResizeMode="NoResize">
+        Title="NMHH adatáttöltés" Height="297" Width="537" ResizeMode="NoResize"
+        Icon="Resources\epapir.ico">
     <Grid>
-        <GroupBox Header="GroupBox"/>
-        <Button x:Name="btnOpenXLS" Content="XLS megnyitása" HorizontalAlignment="Left" VerticalAlignment="Top" Height="43" Width="114" Cursor="Hand" Background="#FF909FF3" Click="btnOpenXLS_Click" Margin="61,141,0,0"/>
-        <Button Content="XML mentése" HorizontalAlignment="Left" Margin="345,141,0,0" VerticalAlignment="Top" Height="43" Width="114" Cursor="Hand" Background="#FF909FF3" Click="Button_Click"/>
-        <TextBox x:Name="txtBoxHashKod" HorizontalAlignment="Left" Margin="93,42,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="387"/>
-        <Label Content="Hash kód:" HorizontalAlignment="Left" Margin="30,38,0,0" VerticalAlignment="Top"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="460*"/>
+            <ColumnDefinition Width="77*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="GroupBox" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnOpenXLS" Content="XLS megnyitása" HorizontalAlignment="Left" VerticalAlignment="Top" Height="43" Width="114" Cursor="Hand" Background="#FF909FF3" Click="btnOpenXLS_Click" Margin="61,194,0,0"/>
+        <Button Content="XML mentése" HorizontalAlignment="Left" Margin="346,194,0,0" VerticalAlignment="Top" Height="43" Width="114" Cursor="Hand" Background="#FF909FF3" Click="Button_Click"/>
+        <TextBox x:Name="txtBoxHashKod" HorizontalAlignment="Left" Margin="149,33,0,0" TextWrapping="Wrap" Text="{Binding Path=text2}" VerticalAlignment="Top" Width="331" Grid.ColumnSpan="2" TextChanged="txtBoxHashKod_TextChanged"/>
+        <Label Content="Mentés helye:" HorizontalAlignment="Left" Margin="61,29,0,0" VerticalAlignment="Top"/>
         <Label Content="Cég:" HorizontalAlignment="Left" Margin="59,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.162,0.503"/>
-        <RadioButton x:Name="rbWayteq" Content="WayteQ" HorizontalAlignment="Left" Margin="108,75,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <RadioButton x:Name="rbMiStores" Content="Mi Stores Hungary" HorizontalAlignment="Left" Margin="268,75,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblEleresiUt" Content="Elérési Út:" HorizontalAlignment="Left" Margin="93,95,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblTest" Content="Label" HorizontalAlignment="Left" Margin="99,115,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbWayteq" Content="WayteQ" HorizontalAlignment="Left" Margin="108,75,0,0" VerticalAlignment="Top" IsChecked="True" Checked="rb_wayteq" />
+        <RadioButton x:Name="rbMiStores" Content="Mi Stores Hungary" HorizontalAlignment="Left" Margin="268,75,0,0" VerticalAlignment="Top" Checked="rb_mistores"  />
+        <Label x:Name="lblEleresiUt" Content="Elérési Út:" HorizontalAlignment="Left" Margin="61,137,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblTest" Content="" HorizontalAlignment="Left" Margin="128,137,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.494,0.502"/>
+        <Label Content="Adószám:" HorizontalAlignment="Left" Margin="59,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.162,0.503"/>
+        <TextBox x:Name="txtBoxAdoszam" HorizontalAlignment="Left" Margin="125,104,0,0" TextWrapping="Wrap" Text="{Binding Path=text}" VerticalAlignment="Top" Width="355" Grid.ColumnSpan="2" TextChanged="txtBoxAdoszam_TextChanged"/>
+        <Label x:Name="lblTeszt" Content="{Binding Path=text}" HorizontalAlignment="Center" Margin="0,164,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.162,0.503"/>
 
     </Grid>
 </Window>

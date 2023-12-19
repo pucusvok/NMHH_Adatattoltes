@@ -21,6 +21,8 @@ namespace NMHH_Adatattoltes
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
     public partial class MainWindow : Window
     {
         Ceg wayteq = new Ceg("WAYTEQ Europe Kft", "14699517243");
@@ -28,11 +30,17 @@ namespace NMHH_Adatattoltes
 
 
         public string eleresiUt=null;
+        public string text { get; set; } = "default";
+        public string text2 { get; set; } = @"c:\";
+        public int counter = 0;
 
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
+
+       
 
         public void btnOpenXLS_Click(object sender, RoutedEventArgs e)
         {
@@ -41,6 +49,8 @@ namespace NMHH_Adatattoltes
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.ShowDialog();
             eleresiUt=openFileDialog.FileName;
+            text2 = System.IO.Path.GetDirectoryName(eleresiUt) + @"\xml\";
+            txtBoxHashKod.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
             lblEleresiUt.Content = "Elerési út: " + eleresiUt;
 
             Fajlmegnyitas fajlmegnyitas = new Fajlmegnyitas();
@@ -58,23 +68,69 @@ namespace NMHH_Adatattoltes
 
             if (Convert.ToBoolean(rbWayteq.IsChecked))
             {
-                nev = "WAYTEQ Europe Kft";
-                aszam = "14699517243";
+                nev = "WAYTEQ Europe Kft.";
+                
             }
             else
             {
                
                 nev = "Mi Stores Hungary Kft.";
-                aszam = "24792697213";
+                
             }
+
+            if (txtBoxAdoszam.Text != null) aszam = txtBoxAdoszam.Text;
+            else aszam = "default";
 
             Ceg ceg = new Ceg(nev, aszam);
 
             Fajlmegnyitas fajlmegnyitas = new Fajlmegnyitas();
             List<Matrica> matricas = fajlmegnyitas.XlsMegnyitas(eleresiUt);
 
-            Fajlmentes.XMLMentes(matricas, txtBoxHashKod.Text, ceg);
-            MessageBox.Show("XML elmentve ide: D:\\NMHH\\kimentett_xls\\");
+            Fajlmentes.XMLMentes(matricas, ceg, text2);
+            MessageBox.Show("XML elmentve ide: " + text2);
+        }
+        private void rb_wayteq(object sender, RoutedEventArgs e)
+        {
+           
+            if(rbWayteq.IsChecked==true)
+            {
+                text = "14699517243";
+      
+                if(counter !=0)
+                {
+                    txtBoxAdoszam.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+                }
+
+                counter++;
+            }
+
+
+
+        }
+        private void rb_mistores(object sender, RoutedEventArgs e)
+        {
+            if(rbMiStores.IsChecked == true)
+            {
+                text = "24792697213";
+            
+
+                txtBoxAdoszam.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+
+                counter++;
+            }
+
+
+
+        }
+
+        private void txtBoxAdoszam_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            text = txtBoxAdoszam.Text;
+        }
+
+        private void txtBoxHashKod_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            text2 = txtBoxHashKod.Text;
         }
     }
 }
